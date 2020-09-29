@@ -5,15 +5,18 @@ import React from "react";
 const ToDoCard = withStyles({
 	root: {
 		border: "1px solid black",
+		margin: [[20]],
+		padding: [[0, 10]],
+		textAlign: "center",
 	},
 })(Card);
 
-const ToDo = ({ task, completed, toggleTask }) => {
+const ToDo = ({ task, toggleTask }) => {
 	return (
 		<ToDoCard
-			className={`task ${completed ? "completed" : ""}`}
-			onClick={() => toggleTask()}>
-			<h2>{task} </h2>
+			className={`task ${task.completed ? "completed" : ""}`}
+			onClick={() => toggleTask(task.id)}>
+			<h2>{task.task} </h2>
 		</ToDoCard>
 	);
 };

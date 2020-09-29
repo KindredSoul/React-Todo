@@ -1,19 +1,28 @@
+import { Box, Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
 // your components will all go in this `component` directory.
-import React, { Component } from "react";
+import React from "react";
+import ToDo from "./Todo";
 
-class ToDoList extends Component {
-	constructor() {
-		super();
-		this.state = [""];
-	}
+const ToDoWrapper = withStyles({
+	root: {
+		border: "1px solid black",
+	},
+})(Box);
 
-	render() {
-		return (
+const ToDoList = ({ tasks, toggleTask, clearTask }) => {
+	return (
+		<ToDoWrapper>
 			<div>
-				<h1>Todos go here</h1>
+				{tasks.map((task) => (
+					<ToDo key={task.id} task={task} toggleTask={toggleTask} />
+				))}
 			</div>
-		);
-	}
-}
+			<Button variant="outlined" color="secondary" onClick={clearTask}>
+				Clear Completed Task
+			</Button>
+		</ToDoWrapper>
+	);
+};
 
 export default ToDoList;

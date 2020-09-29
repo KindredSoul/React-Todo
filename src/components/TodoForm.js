@@ -5,6 +5,12 @@ import React, { Component } from "react";
 const FormContainer = withStyles({
 	root: {
 		border: "1px solid black",
+		width: "30%",
+		padding: "2% 3%",
+		display: "flex",
+		flexFlow: "column wrap",
+		justifyContent: "center",
+		alignItems: "center",
 	},
 })(Box);
 
@@ -12,9 +18,20 @@ class TodoForm extends Component {
 	constructor() {
 		super();
 		this.state = {
-			value: "",
+			task: "",
 		};
 	}
+
+	handleChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	submitTask = (e) => {
+		e.preventDefault();
+		this.setState({ task: "" });
+		this.props.addTask(e, this.state.task);
+	};
+
 	render() {
 		return (
 			<FormContainer>
@@ -22,11 +39,15 @@ class TodoForm extends Component {
 				<TextField
 					name="task"
 					type="text"
+					value={this.state.task}
 					fullWidth
 					margin="dense"
 					variant="outlined"
+					onChange={this.handleChange}
 				/>
-				<Button variant="outlined">Add Task</Button>
+				<Button variant="outlined" onClick={this.submitTask}>
+					Add Task
+				</Button>
 			</FormContainer>
 		);
 	}
