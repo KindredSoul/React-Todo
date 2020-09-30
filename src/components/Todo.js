@@ -1,23 +1,27 @@
-import { withStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import { Card } from "@material-ui/core";
 import React from "react";
 
-const ToDoCard = withStyles({
+const useStyles = makeStyles({
 	root: {
 		border: "1px solid black",
 		margin: [[20]],
 		padding: [[0, 10]],
 		textAlign: "center",
 	},
-})(Card);
+	completed: {
+		textDecoration: "line-through",
+	},
+});
 
 const ToDo = ({ task, toggleTask }) => {
+	const { root, completed } = useStyles();
 	return (
-		<ToDoCard
-			className={`task ${task.completed ? "completed" : ""}`}
+		<Card
+			className={`task ${root} ${task.completed ? completed : ""}`}
 			onClick={() => toggleTask(task.id)}>
 			<h2>{task.task} </h2>
-		</ToDoCard>
+		</Card>
 	);
 };
 
